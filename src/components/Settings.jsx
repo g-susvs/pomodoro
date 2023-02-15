@@ -3,6 +3,10 @@ import { AppContext } from "../context/AppContext"
 
 export const Settings = () => {
     const {
+        colors: {
+            workColor,
+            breakColor
+        },
         pomodoro: {
             workMinutes,
             breakMinutes,
@@ -10,29 +14,36 @@ export const Settings = () => {
             setBreakMinutes,
             setMode
         },
+        setColors,
         setShowSettings
     } = useContext(AppContext)
 
-    const [minutes, setMinutes] = useState({
+    const [settings, setSettings] = useState({
         work: workMinutes,
-        break: breakMinutes
+        break: breakMinutes,
+        workColor: workColor,
+        breakColor: breakColor
     })
-    
+
     const handleInputChange = (event) => {
         const { value, name } = event.target
-        setMinutes({
-            ...minutes,
-            [name]:value
+        setSettings({
+            ...settings,
+            [name]: value
         })
     }
     const handleSetTime = (event) => {
         event.preventDefault()
-        
-        setWorkMinutes(minutes.work)
-        setBreakMinutes(minutes.break)
+
+        setWorkMinutes(settings.work)
+        setBreakMinutes(settings.break)
+        setColors({
+            workColor: settings.workColor,
+            breakColor: settings.breakColor
+        })
         setMode('work')
         setShowSettings(false)
-        localStorage.setItem('minutes', JSON.stringify(minutes))
+        localStorage.setItem('settings', JSON.stringify(settings))
     }
 
     return (
@@ -41,18 +52,44 @@ export const Settings = () => {
             <form onSubmit={handleSetTime}>
                 <input
                     type="number"
-                    placeholder="Work minutes"
+                    placeholder="Work settings"
                     name="work"
-                    value={minutes.work}
+                    value={settings.work}
                     onChange={handleInputChange}
                 />
                 <input
                     type="number"
-                    placeholder="Break minutes"
+                    placeholder="Break settings"
                     name="break"
-                    value={minutes.break}
+                    value={settings.break}
                     onChange={handleInputChange}
                 />
+                <h3>Set color</h3>
+                <section className="color-settings">
+                    <div>
+                        <input
+                            className="set-color"
+                            type="color"
+                            name="workColor"
+                            value={settings.workColor}
+                            onChange={handleInputChange}
+                        />
+                        <label>Work</label>
+
+                    </div>
+                    <div>
+                        <input
+                            className="set-color"
+                            type="color"
+                            name="breakColor"
+                            value={settings.breakColor}
+                            onChange={handleInputChange}
+                        />
+                        <label>
+                            Break</label>
+
+                    </div>
+                </section>
                 <button
                     className="save"
                     type="submit"

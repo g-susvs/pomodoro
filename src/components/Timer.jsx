@@ -6,6 +6,10 @@ import { AppContext } from '../context/AppContext';
 export const Timer = () => {
     
     const {
+        colors: {
+            workColor: work_c,
+            breakColor: break_c
+        },
         pomodoro: {
             secondsLeft,
             totalSeconds,
@@ -21,8 +25,8 @@ export const Timer = () => {
     let seconds = secondsLeft % 60
     if (seconds < 10) seconds = '0' + seconds
     
-    const workColor = '#f72585';
-    const breakColor = '#35e95f';
+    const workColor = work_c;
+    const breakColor = break_c;
     const backgroundColor = '#262626'
     let timerText = `${minutes}:${seconds}`
 
