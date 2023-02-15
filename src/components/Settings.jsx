@@ -1,4 +1,5 @@
 import { useContext, useState } from "react"
+import { FaSave } from "react-icons/fa"
 import { AppContext } from "../context/AppContext"
 
 export const Settings = () => {
@@ -55,15 +56,13 @@ export const Settings = () => {
                     placeholder="Work settings"
                     name="work"
                     value={settings.work}
-                    onChange={handleInputChange}
-                />
+                    onChange={handleInputChange} />
                 <input
                     type="number"
                     placeholder="Break settings"
                     name="break"
                     value={settings.break}
-                    onChange={handleInputChange}
-                />
+                    onChange={handleInputChange} />
                 <h3>Set color</h3>
                 <section className="color-settings">
                     <div>
@@ -72,10 +71,8 @@ export const Settings = () => {
                             type="color"
                             name="workColor"
                             value={settings.workColor}
-                            onChange={handleInputChange}
-                        />
+                            onChange={handleInputChange} />
                         <label>Work</label>
-
                     </div>
                     <div>
                         <input
@@ -83,17 +80,17 @@ export const Settings = () => {
                             type="color"
                             name="breakColor"
                             value={settings.breakColor}
-                            onChange={handleInputChange}
-                        />
-                        <label>
-                            Break</label>
-
+                            onChange={handleInputChange} />
+                        <label>Break</label>
                     </div>
                 </section>
                 <button
                     className="save"
-                    type="submit"
-                >Save</button>
+                    title="save"
+                    type="submit">
+                    <FaSave />
+                    <span>Save</span>
+                </button>
             </form>
 
         </div>

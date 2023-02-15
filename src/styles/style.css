@@ -53,13 +53,16 @@ button {
 }
 
 .btn-timer {
-    font-size: 1.5rem;
+    font-size:1.5rem;
     width: 60px;
     height: 60px;
+    text-align: center;
     color: #313131;
+    background-color: #f7f7f7;
     border-radius: 50%;
     text-align: center;
     transition: all 500ms;
+    padding: 10px;
 }
 
 .btn-timer:hover {
@@ -69,7 +72,7 @@ button {
 .btn-header {
     background: none;
     color: #ffffff;
-    font-size: 2rem;
+    font-size: 2.5rem;
     transition: all 500ms;
 }
 
@@ -154,6 +157,10 @@ input[type="number"]::-webkit-outer-spin-button {
     font-weight: 500;
     padding: 10px 15px;
     transition: all 300ms;
+    display: flex;
+    gap: 8px;
+    flex-direction: row;
+    align-items: center;
 }
 
 .save:hover {

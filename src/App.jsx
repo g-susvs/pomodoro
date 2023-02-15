@@ -1,4 +1,5 @@
 import { useContext } from "react"
+import { AiTwotoneSetting, IoClose } from 'react-icons/all';
 import { Settings } from "./components/Settings"
 import { Timer } from "./components/Timer"
 import { AppContext } from "./context/AppContext"
@@ -13,15 +14,9 @@ const App = () => {
         {
           (showSettings)
             ?
-            <button className="btn-header" onClick={() => setShowSettings(false)}>
-              <i className="fas fa-sharp fa-solid fa-arrow-left" ></i>
-            </button>
-
+            <IoClose className="btn-header" title="settings" onClick={() => setShowSettings(false)} />
             :
-            <button className="btn-header" onClick={() => setShowSettings(true)}>
-              <i className="fas fa-solid fa-bars"></i>
-            </button>
-
+            <AiTwotoneSetting className="btn-header" title="back" onClick={() => setShowSettings(true)} />
         }
       </header>
       {

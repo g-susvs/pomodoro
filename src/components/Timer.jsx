@@ -1,10 +1,11 @@
 import { useContext } from 'react';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import { BsFillPauseFill, BsFillPlayFill } from 'react-icons/bs';
 import { AppContext } from '../context/AppContext';
 
 export const Timer = () => {
-    
+
     const {
         colors: {
             workColor: work_c,
@@ -21,16 +22,16 @@ export const Timer = () => {
 
 
     const percentage = secondsLeft / totalSeconds * 100
-    let minutes = Math.floor(secondsLeft / 60) 
+    let minutes = Math.floor(secondsLeft / 60)
     let seconds = secondsLeft % 60
     if (seconds < 10) seconds = '0' + seconds
-    
+
     const workColor = work_c;
     const breakColor = break_c;
     const backgroundColor = '#262626'
     let timerText = `${minutes}:${seconds}`
 
-    if(secondsLeft < 0) timerText = '0:00'
+    if (secondsLeft < 0) timerText = '0:00'
 
     return (
         <main>
@@ -40,7 +41,7 @@ export const Timer = () => {
                     value={percentage}
                     background
                     backgroundPadding={6}
-                    text={ timerText }
+                    text={timerText}
                     styles={buildStyles({
                         rotation: 1,
                         pathTransitionDuration: 1,
@@ -55,21 +56,18 @@ export const Timer = () => {
                 {
                     (isPaused)
                         ?
-                        <button
+                        <BsFillPlayFill
                             className="btn-timer"
-                            type="button"
+                            title='play'
                             onClick={() => { setIsPaused(false); isPausedRef.current = false }}
-                        >
-                            <i className="fas fa-solid fa-play"></i>
-                        </button>
+                        />
                         :
-                        <button
-                        className="btn-timer"
-                            type="button"
+
+                        <BsFillPauseFill
+                            className="btn-timer"
+                            title='paused'
                             onClick={() => { setIsPaused(true); isPausedRef.current = true }}
-                        >
-                            <i className="fas fa-solid fa-stop"></i>
-                        </button>
+                        />
 
                 }
             </div>
