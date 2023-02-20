@@ -3,8 +3,8 @@ import Song from '../../public/song.wav'
 
 export const usePomodoro = () => {
 
-    const [workMinutes, setWorkMinutes] = useState(1)
-    const [breakMinutes, setBreakMinutes] = useState(1)
+    const [workMinutes, setWorkMinutes] = useState(25)
+    const [breakMinutes, setBreakMinutes] = useState(5)
 
     const [isPaused, setIsPaused] = useState(true)
     const [mode, setMode] = useState('work') // work/break
@@ -75,7 +75,6 @@ export const usePomodoro = () => {
         : breakMinutes * 60
 
     return {
-        secondsLeftRef,
         secondsLeft,
         mode,
         isPausedRef,

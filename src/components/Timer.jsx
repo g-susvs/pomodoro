@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { BsFillPauseFill, BsFillPlayFill } from 'react-icons/bs';
@@ -33,44 +33,52 @@ export const Timer = () => {
 
     if (secondsLeft < 0) timerText = '0:00'
 
+    useEffect(() => {
+        let titleText = (mode === 'work') ? 'Work minutes' : 'Break minutes'
+        document.title = (secondsLeft > 0)
+            ? `${timerText} - ${titleText}`
+            : '0:00'
+    }, [secondsLeft])
+
     return (
-        <main>
-            <div>
-                <CircularProgressbar
-                    className='shadow'
-                    value={percentage}
-                    background
-                    backgroundPadding={6}
-                    text={timerText}
-                    styles={buildStyles({
-                        rotation: 1,
-                        pathTransitionDuration: 1,
-                        backgroundColor,
-                        trailColor: backgroundColor,
-                        textColor: '#fff',
-                        pathColor: (mode === 'work') ? workColor : breakColor,
-                    })}
-                />
-            </div>
-            <div className="group-btn">
-                {
-                    (isPaused)
-                        ?
-                        <BsFillPlayFill
-                            className="btn-timer"
-                            title='play'
-                            onClick={() => { setIsPaused(false); isPausedRef.current = false }}
-                        />
-                        :
+        <>
+            <main>
+                <div>
+                    <CircularProgressbar
+                        className='shadow'
+                        value={percentage}
+                        background
+                        backgroundPadding={6}
+                        text={timerText}
+                        styles={buildStyles({
+                            rotation: 1,
+                            pathTransitionDuration: 1,
+                            backgroundColor,
+                            trailColor: backgroundColor,
+                            textColor: '#fff',
+                            pathColor: (mode === 'work') ? workColor : breakColor,
+                        })}
+                    />
+                </div>
+                <div className="group-btn">
+                    {
+                        (isPaused)
+                            ?
+                            <BsFillPlayFill
+                                className="btn-timer"
+                                title='play'
+                                onClick={() => { setIsPaused(false); isPausedRef.current = false }}
+                            />
+                            :
 
-                        <BsFillPauseFill
-                            className="btn-timer"
-                            title='paused'
-                            onClick={() => { setIsPaused(true); isPausedRef.current = true }}
-                        />
-
-                }
-            </div>
-        </main>
+                            <BsFillPauseFill
+                                className="btn-timer"
+                                title='paused'
+                                onClick={() => { setIsPaused(true); isPausedRef.current = true }}
+                            />
+                    }
+                </div>
+            </main>
+        </>
     )
 }
