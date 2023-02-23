@@ -15,10 +15,6 @@ export const usePomodoro = () => {
     const isPausedRef = useRef(isPaused)
     const modeRef = useRef(mode)
 
-    const song = new Audio(Song)
-    song.loop = true
-
-
     function switchMode() {
         const nextMode = (modeRef.current === 'work')
             ? 'break'
@@ -52,14 +48,12 @@ export const usePomodoro = () => {
                 return
             }
             if (secondsLeftRef.current === 0) {
+                const song = new Audio(Song)
+                song.loop = true
                 song.play()
                 setTimeout(() => {
                     song.pause()
-                    song.currentTime = 0
-
                     return switchMode()
-
-
                 }, 5000);
             }
             tick()
